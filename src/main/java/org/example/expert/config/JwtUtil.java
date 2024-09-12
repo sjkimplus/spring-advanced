@@ -62,4 +62,27 @@ public class JwtUtil {
                 .parseClaimsJws(token)
                 .getBody();
     }
+
+    // Helper method to decode JWT and extract userId
+    public static String extractUserIdFromToken(String token) {
+        String secretKey = "testEpertKeyfaewrfo4waefmaoe4irefmarwprk5n6rCV7J2Y7Yq5n6rCV7J2Y7Yq5n6rCV7J2ofmPWEf==";  // Use your actual secret key
+        Claims claims = Jwts.parser()
+                .setSigningKey(secretKey)
+                .parseClaimsJws(token)
+                .getBody();
+
+        // Assuming the userId is stored in the claim "sub" (subject)
+        return claims.getSubject();
+    }
+
+    // Helper method to extract user type from the token
+    public static String extractUserTypeFromToken(String token) {
+        String secretKey = "testEpertKeyfaewrfo4waefmaoe4irefmarwprk5n6rCV7J2Y7Yq5n6rCV7J2Y7Yq5n6rCV7J2ofmPWEf==";  // Use your actual secret key
+        Claims claims = Jwts.parser()
+                .setSigningKey(secretKey)
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims.get("userRole", String.class); // Adjust this if it's named differently
+    }
 }
